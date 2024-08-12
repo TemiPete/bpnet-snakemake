@@ -1,0 +1,18 @@
+{
+    "0": {
+        "signal": {
+            "source": ["/beagle3/haky/users/temi/data/bpnet-personalized/data/NKI_13_T.hg38.bw"]
+        },
+        "loci": {
+            "source": ["/beagle3/haky/users/temi/data/bpnet-personalized/data/NKI_13_T.formattedInputPeaks.bed"]
+        },
+        "background_loci": {
+            "source": ["/beagle3/haky/users/temi/data/bpnet-personalized/data/gc_negatives.bed"],
+            "ratio": [0.25]
+        },
+        "bias": {
+            "source": ["/beagle3/haky/users/temi/data/bpnet-personalized/data/NKI_13_N.hg38.bw"],
+            "smoothing": [null]
+        }
+    }
+}

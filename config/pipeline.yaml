@@ -1,0 +1,19 @@
+
+---
+# directories
+pipeline_dir: '/beagle3/haky/users/temi/projects/TFPred-snakemake'
+dataset: 'NKI_13' # give this dataset or run a name
+date: "2024-08-09" # this date will be used to create the directory structure
+
+hg38_chromsizes: "directives/hg38.chrom.sizes"
+chroms_list: "directives/chroms.txt"
+blacklist_bed: "directives/blacklist.bed"
+genome: "/beagle3/haky/users/temi/data/bpnet-personalized/data/NKI_13.fa"
+bw_file: "/beagle3/haky/users/temi/data/bpnet-personalized/data/NKI_13_T.hg38.bw"
+bias_file: "/beagle3/haky/users/temi/data/bpnet-personalized/data/NKI_13_N.hg38.bw"
+peaks_file: "/beagle3/haky/users/temi/data/bpnet-personalized/data/NKI_13_T.formattedInputPeaks.bed"
+
+# training directives
+cv_splits: 'directives/splits.json'
+model_params: 'directives/bpnet_params.json'
+...
