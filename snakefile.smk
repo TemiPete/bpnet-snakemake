@@ -41,7 +41,7 @@ rule all:
         expand(os.path.join(FILES_DIR, '{runid}.gc_negatives.bed'), runid = runname),
         expand(os.path.join(FILES_DIR, '{runid}.candidate_negatives.bed'), runid = runname),
         expand(os.path.join(FILES_DIR, '{runid}.input_bpnet.json'), runid = runname),
-        expand(os.path.join(MODEL_DIR, '{runid}.bpnet-AR.h5'), runid = runname)
+        expand(os.path.join(MODEL_DIR, '{runid}.bpnet-AR.h5_split000'), runid = runname)
 
 
 rule create_input:
@@ -101,7 +101,7 @@ rule train_bpnet:
     input:
         rules.filter_input.output.f6
     output:
-        os.path.join(MODEL_DIR, '{runid}.bpnet-AR.h5')
+        directory(os.path.join(MODEL_DIR, '{runid}.bpnet-AR.h5_split000'))
     message: 
         "working on {wildcards}"
     params:
@@ -113,7 +113,8 @@ rule train_bpnet:
         genome = config['genome'],
         mdir=MODEL_DIR,
         cv_splits = config['cv_splits'],
-        model_params = config['model_params']
+        model_params = config['model_params'],
+        bname = '{runid}.bpnet-AR.h5'
     resources:
         partition="caslake",
         time="36:00:00", 
@@ -121,5 +122,5 @@ rule train_bpnet:
         cpu_task=2
     shell:
         """
-        sbatch workflow/src/train.sbatch {input} {params.mdir} {params.genome} {params.hg38_chromsizes} {params.chroms_list} {output} {params.cv_splits} {params.model_params}
+        sbatch workflow/src/train.sbatch {input} {params.mdir} {params.genome} {params.hg38_chromsizes} {params.chroms_list} {params.bname} {params.cv_splits} {params.model_params}
         """
